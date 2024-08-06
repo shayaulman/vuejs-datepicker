@@ -1,7 +1,7 @@
 {
-  "name": "vuejs-datepicker",
-  "version": "1.6.2",
-  "description": "A simple Vue.js datepicker component. Supports disabling of dates, inline mode, translations",
+  "name": "@shayaulman/vuejs-datepicker",
+  "version": "1.6.3-fork.0",
+  "description": "A fork of vuejs-datepicker. Includes additional features and bug fixes.",
   "keywords": [
     "vue",
     "datepicker",
@@ -36,7 +36,9 @@
     "lint",
     "test"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "jewish-date": "^2.0.11"
+  },
   "peerDependencies": {
     "vue": "^2.6.10"
   },

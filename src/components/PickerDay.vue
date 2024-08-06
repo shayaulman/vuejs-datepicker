@@ -5,8 +5,19 @@
       <span
         @click="isRtl ? nextMonth() : previousMonth()"
         class="prev"
-        :class="{'disabled': isLeftNavDisabled}">&lt;</span>
-      <span class="day__month_btn" @click="showMonthCalendar" :class="allowedToShowView('month') ? 'up' : ''">{{ isYmd ? currYearName : currMonthName }} {{ isYmd ? currMonthName : currYearName }}</span>
+        :class="{ disabled: isLeftNavDisabled }"
+        >&lt;</span
+      >
+      <span
+        class="day__month_btn"
+        @click="showMonthCalendar"
+        :class="allowedToShowView('month') ? 'up' : ''"
+      >
+        <slot name="monthBtnContent" :data="{ currMonthName, currYearName }">
+          {{ isYmd ? currYearName : currMonthName }}
+          {{ isYmd ? currMonthName : currYearName }}
+        </slot>
+      </span>
       <span
         @click="isRtl ? previousMonth() : nextMonth()"
         class="next"
@@ -15,14 +26,23 @@
     <div :class="isRtl ? 'flex-rtl' : ''">
       <span class="cell day-header" v-for="d in daysOfWeek" :key="d.timestamp">{{ d }}</span>
       <template v-if="blankDays > 0">
-        <span class="cell day blank" v-for="d in blankDays" :key="d.timestamp"></span>
-      </template><!--
-      --><span class="cell day"
-          v-for="day in days"
-          :key="day.timestamp"
-          :class="dayClasses(day)"
-          v-html="dayCellContent(day)"
-          @click="selectDate(day)"></span>
+        <span
+          class="cell day blank"
+          v-for="d in blankDays"
+          :key="d.timestamp"
+        ></span> </template
+      ><!--
+      --><span
+        class="cell day"
+        v-for="day in days"
+        :key="day.timestamp"
+        :class="dayClasses(day)"
+        @click="selectDate(day)"
+      >
+        <slot name="dayCellContent" :cell="day">
+          {{ dayCellContent(day) }}
+        </slot>
+      </span>
     </div>
   </div>
 </template>

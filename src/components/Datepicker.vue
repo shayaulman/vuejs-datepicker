@@ -53,6 +53,12 @@
       @showMonthCalendar="showMonthCalendar"
       @selectedDisabled="selectDisabledDate">
       <slot name="beforeCalendarHeader" slot="beforeCalendarHeader"></slot>
+      <template #dayCellContent="{ cell }">
+        <slot v-if="cell" name="dayCellContent" :cell="cell" />
+      </template>
+      <template #monthBtnContent="{ data }">
+        <slot name="monthBtnContent" :data="data" />
+      </template>
     </picker-day>
 
     <!-- Month View -->
